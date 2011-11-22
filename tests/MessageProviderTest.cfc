@@ -17,5 +17,5 @@ component extends="mxunit.framework.TestCase" {
 		var msg = messageProvider.getMessage('unknown');
 		assert(!compareNoCase(msg,''));
 	}
-	
+
 }

@@ -1,16 +1,16 @@
 component extends="mxunit.framework.TestCase" {
 
 	public void function beforeTests() {
-		ormReload();	
+		ormReload();
 	}
 	
 	public void function setup(){
 		validator = new ok.Validator('DefaultMessages');
 	}
-
+	
 	public void function testInit(){
 		debug(validator.getPropertyRules());
-		debug(validator.getComponentRules());		
+		debug(validator.getComponentRules());
 		assertTrue(true);
 	}
 	
@@ -70,21 +70,20 @@ component extends="mxunit.framework.TestCase" {
 		assertFalse(vr.hasErrors());
 	}
 	
-	
 	// Nested Validation
 	
 	public void function nestedValidationPasses(){
 		var parent = new ok.tests.entities.FooPersonArray();
 		parent.setFirstName('John');
 		parent.setLastName('Doe');
-		parent.setPhone('123-456-7890');		
+		parent.setPhone('123-456-7890');
 		var child = new ok.tests.entities.FooPersonArray();
 		child.setFirstName('Johnny');
-		child.setLastName('Doe');		
+		child.setLastName('Doe');
 		parent.addChild(child);
-		child.setParent(parent);			
+		child.setParent(parent);
 		var vr = validator.validate(parent);
-		debug(vr);		
+		debug(vr);
 		assertFalse(vr.hasErrors());
 	}
 	
@@ -92,19 +91,19 @@ component extends="mxunit.framework.TestCase" {
 		var parent = new ok.tests.entities.FooPersonArray();
 		parent.setFirstName('John');
 		parent.setLastName('Doe');
-		parent.setPhone('123-456-7890');		
+		parent.setPhone('123-456-7890');
 		var child = new ok.tests.entities.FooPersonArray();
 		child.setFirstName('Johnny');
 		child.setLastName('Doe');
 		child.setPhone('test');		
 		parent.addChild(child);
-		child.setParent(parent);			
+		child.setParent(parent);
 		
 		var vr = validator.validate(parent);
 		debug(vr);
 		assertTrue(vr.hasErrors());
 		
-		var errors = vr.getErrors();		
+		var errors = vr.getErrors();
 		assertEquals(1, arrayLen(errors));
 		
 		assertEquals('ok.tests.entities.FooPersonArray.children[1]',errors[1].getContext());
@@ -114,14 +113,13 @@ component extends="mxunit.framework.TestCase" {
 		assertEquals('OK_ISVALID',errors[1].getValidationType());
 		assertEquals('Phone is not a valid telephone.',errors[1].getMessage());
 		
-		
 	}
 	
 	public void function doubleNestedChildArrayPropertyValidationFails(){
 		var parent = new ok.tests.entities.FooPersonArray();
 		parent.setFirstName('John');
 		parent.setLastName('Doe');
-		parent.setPhone('123-456-7890');		
+		parent.setPhone('123-456-7890');
 		
 		var child = new ok.tests.entities.FooPersonArray();
 		child.setFirstName('Johnny');
@@ -134,16 +132,16 @@ component extends="mxunit.framework.TestCase" {
 		var grandchild = new ok.tests.entities.FooPersonArray();
 		grandchild.setFirstName('Jane');
 		grandchild.setLastName('Doe');
-		grandchild.setPhone('test');	
+		grandchild.setPhone('test');
 		
 		child.addChild(grandchild);
 		grandchild.setParent(child);
-					
+		
 		var vr = validator.validate(parent);
 		debug(vr);
 		assertTrue(vr.hasErrors());
 		
-		var errors = vr.getErrors();		
+		var errors = vr.getErrors();
 		assertEquals(2, arrayLen(errors));
 		
 		assertEquals('ok.tests.entities.FooPersonArray.children[1]',errors[1].getContext());
@@ -168,20 +166,20 @@ component extends="mxunit.framework.TestCase" {
 		parent.setFirstName('John');
 		parent.setLastName('Doe');
 		parent.setPhone('123-456-7890');
-									
+		
 		var child = new ok.tests.entities.FooPersonStruct();
 		child.setFirstName('Johnny');
 		child.setLastName('Doe');
 		child.setPhone('test');
-									
+		
 		parent.addChild(8, child);
 		child.setParent(parent);
-				
+		
 		var vr = validator.validate(parent);
 		debug(vr);
 		assertTrue(vr.hasErrors());
 		
-		var errors = vr.getErrors();		
+		var errors = vr.getErrors();
 		assertEquals(1, arrayLen(errors));
 		
 		assertEquals('ok.tests.entities.FooPersonStruct.children[8]',errors[1].getContext());
@@ -190,7 +188,7 @@ component extends="mxunit.framework.TestCase" {
 		assertEquals('phone',errors[1].getProperty());
 		assertEquals('OK_ISVALID',errors[1].getValidationType());
 		assertEquals('Phone is not a valid telephone.',errors[1].getMessage());
-				
-	}	
-	
+		
+	}
+
 }

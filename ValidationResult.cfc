@@ -1,7 +1,7 @@
 component accessors="true" {
 
 	property name="errors" type="array";
-
+	
 	public function init(){
 		setErrors([]);
 		return this;
@@ -17,7 +17,7 @@ component accessors="true" {
 	
 	public function addError(context, entity, validationlevel, property, validationType, message){
 		var validationError = new validationError();
-				
+		
 		validationError.setContext(arguments.context);
 		validationError.setEntity(arguments.entity);
 		validationError.setValidationlevel(arguments.validationlevel);

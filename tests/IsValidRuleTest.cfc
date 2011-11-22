@@ -1,13 +1,13 @@
 component extends="mxunit.framework.TestCase" {
 
 	public void function beforeTests() {
-		ormReload();	
+		ormReload();
 	}
 	
 	public void function setup(){
 		messageProvider = new ok.MessageProvider(); 
 		rule = new ok.rules.IsValidRule(messageProvider);
-	}	
+	}
 	
 	public void function testAnyPasses(){
 		var obj = new ok.tests.entities.FooIsValidTest();
@@ -16,7 +16,7 @@ component extends="mxunit.framework.TestCase" {
 		obj.setAnyProp('Test');
 		var result = rule.isValid(obj, prop, 'ok_isvalid');
 		assertTrue(result);
-	}	
+	}
 	
 	public void function testAnyFails(){
 		/* nothing */
@@ -29,7 +29,7 @@ component extends="mxunit.framework.TestCase" {
 		obj.setArrayProp(['one','two']);
 		var result = rule.isValid(obj, prop, 'ok_isvalid');
 		assertTrue(result);
-	}	
+	}
 	
 	public void function testArrayFails(){
 		var obj = new ok.tests.entities.FooIsValidTest();
@@ -48,7 +48,7 @@ component extends="mxunit.framework.TestCase" {
 		obj.setBinaryProp(toBinary(toBase64('test')));
 		var result = rule.isValid(obj, prop, 'ok_isvalid');
 		assertTrue(result);
-	}	
+	}
 	
 	public void function testBinaryFails(){
 		var obj = new ok.tests.entities.FooIsValidTest();
@@ -57,7 +57,7 @@ component extends="mxunit.framework.TestCase" {
 		obj.setBinaryProp('test');
 		var result = rule.isValid(obj, prop, 'ok_isvalid');
 		assertFalse(result);
-	}	
+	}
 	
 	public void function testBooleanPasses(){
 		var obj = new ok.tests.entities.FooIsValidTest();
@@ -66,7 +66,7 @@ component extends="mxunit.framework.TestCase" {
 		obj.setBooleanProp('true');
 		var result = rule.isValid(obj, prop, 'ok_isvalid');
 		assertTrue(result);
-	}	
+	}
 	
 	public void function testBooleanFails(){
 		var obj = new ok.tests.entities.FooIsValidTest();
@@ -75,7 +75,7 @@ component extends="mxunit.framework.TestCase" {
 		obj.setBooleanProp('fail');
 		var result = rule.isValid(obj, prop, 'ok_isvalid');
 		assertFalse(result);
-	}	
+	}
 	
 	public void function testComponentPasses(){
 		var obj = new ok.tests.entities.FooIsValidTest();
@@ -85,7 +85,7 @@ component extends="mxunit.framework.TestCase" {
 		obj.setComponentProp(val);
 		var result = rule.isValid(obj, prop, 'ok_isvalid');
 		assertTrue(result);
-	}	
+	}
 	
 	public void function testComponentFails(){
 		var obj = new ok.tests.entities.FooIsValidTest();
@@ -104,7 +104,7 @@ component extends="mxunit.framework.TestCase" {
 		obj.setCreditCardProp('378282246310005');
 		var result = rule.isValid(obj, prop, 'ok_isvalid');
 		assertTrue(result);
-	}	
+	}
 	
 	public void function testCreditCardFails(){
 		var obj = new ok.tests.entities.FooIsValidTest();
@@ -178,7 +178,7 @@ component extends="mxunit.framework.TestCase" {
 		obj.setEurodateProp('25/12/2011');
 		var result = rule.isValid(obj, prop, 'ok_isvalid');
 		assertTrue(result);
-	}	
+	}
 	
 	public void function testEurodateFails(){
 		var obj = new ok.tests.entities.FooIsValidTest();
@@ -196,7 +196,7 @@ component extends="mxunit.framework.TestCase" {
 		obj.setFloatProp(1.23);
 		var result = rule.isValid(obj, prop, 'ok_isvalid');
 		assertTrue(result);
-	}	
+	}
 	
 	public void function testFloatFails(){
 		var obj = new ok.tests.entities.FooIsValidTest();
@@ -214,7 +214,7 @@ component extends="mxunit.framework.TestCase" {
 		obj.setNumericProp(1.23);
 		var result = rule.isValid(obj, prop, 'ok_isvalid');
 		assertTrue(result);
-	}	
+	}
 	
 	public void function testNumericFails(){
 		var obj = new ok.tests.entities.FooIsValidTest();
@@ -232,7 +232,7 @@ component extends="mxunit.framework.TestCase" {
 		obj.setGuidProp('505560c0-1474-11e1-be50-0800200c9a66'); // GUID
 		var result = rule.isValid(obj, prop, 'ok_isvalid');
 		assertTrue(result);
-	}	
+	}
 	
 	public void function testGuidFails(){
 		var obj = new ok.tests.entities.FooIsValidTest();
@@ -250,7 +250,7 @@ component extends="mxunit.framework.TestCase" {
 		obj.setIntegerProp(1);
 		var result = rule.isValid(obj, prop, 'ok_isvalid');
 		assertTrue(result);
-	}	
+	}
 	
 	public void function testIntegerFails(){
 		var obj = new ok.tests.entities.FooIsValidTest();
@@ -269,7 +269,7 @@ component extends="mxunit.framework.TestCase" {
 		obj.setQueryProp(val);
 		var result = rule.isValid(obj, prop, 'ok_isvalid');
 		assertTrue(result);
-	}	
+	}
 	
 	public void function testQueryFails(){
 		var obj = new ok.tests.entities.FooIsValidTest();
@@ -288,7 +288,7 @@ component extends="mxunit.framework.TestCase" {
 		obj.setRangeMinMaxProp(7);
 		var result = rule.isValid(obj, prop, 'ok_isvalid');
 		assertTrue(result);
-	}	
+	}
 	
 	public void function testRangeMinMaxFails(){
 		var obj = new ok.tests.entities.FooIsValidTest();
@@ -306,7 +306,7 @@ component extends="mxunit.framework.TestCase" {
 		obj.setRangeMinProp(1500);
 		var result = rule.isValid(obj, prop, 'ok_isvalid');
 		assertTrue(result);
-	}	
+	}
 	
 	public void function testRangeMinFails(){
 		var obj = new ok.tests.entities.FooIsValidTest();
@@ -324,7 +324,7 @@ component extends="mxunit.framework.TestCase" {
 		obj.setRangeMaxProp(-1500);
 		var result = rule.isValid(obj, prop, 'ok_isvalid');
 		assertTrue(result);
-	}	
+	}
 	
 	public void function testRangeMaxFails(){
 		var obj = new ok.tests.entities.FooIsValidTest();
@@ -342,7 +342,7 @@ component extends="mxunit.framework.TestCase" {
 		obj.setRegExProp('hello');
 		var result = rule.isValid(obj, prop, 'ok_isvalid');
 		assertTrue(result);
-	}	
+	}
 	
 	public void function testRegExFails(){
 		var obj = new ok.tests.entities.FooIsValidTest();
@@ -360,7 +360,7 @@ component extends="mxunit.framework.TestCase" {
 		obj.setRegularExpressionProp('hello');
 		var result = rule.isValid(obj, prop, 'ok_isvalid');
 		assertTrue(result);
-	}	
+	}
 	
 	public void function testRegularExpressionFails(){
 		var obj = new ok.tests.entities.FooIsValidTest();
@@ -378,7 +378,7 @@ component extends="mxunit.framework.TestCase" {
 		obj.setSSNProp('123-45-6789');
 		var result = rule.isValid(obj, prop, 'ok_isvalid');
 		assertTrue(result);
-	}	
+	}
 	
 	public void function testSSNFails(){
 		var obj = new ok.tests.entities.FooIsValidTest();
@@ -396,7 +396,7 @@ component extends="mxunit.framework.TestCase" {
 		obj.setSocialSecurityNumberProp('123-45-6789');
 		var result = rule.isValid(obj, prop, 'ok_isvalid');
 		assertTrue(result);
-	}	
+	}
 	
 	public void function testSocialSecurityNumberFails(){
 		var obj = new ok.tests.entities.FooIsValidTest();
@@ -414,7 +414,7 @@ component extends="mxunit.framework.TestCase" {
 		obj.setStringProp('test');
 		var result = rule.isValid(obj, prop, 'ok_isvalid');
 		assertTrue(result);
-	}	
+	}
 	
 	public void function testStringFails(){
 		var obj = new ok.tests.entities.FooIsValidTest();
@@ -433,7 +433,7 @@ component extends="mxunit.framework.TestCase" {
 		obj.setStructProp({key = 'value'});
 		var result = rule.isValid(obj, prop, 'ok_isvalid');
 		assertTrue(result);
-	}	
+	}
 	
 	public void function testStructFails(){
 		var obj = new ok.tests.entities.FooIsValidTest();
@@ -451,7 +451,7 @@ component extends="mxunit.framework.TestCase" {
 		obj.setTelephoneProp('123-456-7890');
 		var result = rule.isValid(obj, prop, 'ok_isvalid');
 		assertTrue(result);
-	}	
+	}
 	
 	public void function testTelephoneFails(){
 		var obj = new ok.tests.entities.FooIsValidTest();
@@ -469,7 +469,7 @@ component extends="mxunit.framework.TestCase" {
 		obj.setURLProp('http://www.google.com');
 		var result = rule.isValid(obj, prop, 'ok_isvalid');
 		assertTrue(result);
-	}	
+	}
 	
 	public void function testURLFails(){
 		var obj = new ok.tests.entities.FooIsValidTest();
@@ -487,7 +487,7 @@ component extends="mxunit.framework.TestCase" {
 		obj.setUuidProp('505560c0-1474-11e1-be500800200c9a66'); // UUID
 		var result = rule.isValid(obj, prop, 'ok_isvalid');
 		assertTrue(result);
-	}	
+	}
 	
 	public void function testUuidFails(){
 		var obj = new ok.tests.entities.FooIsValidTest();
@@ -497,7 +497,7 @@ component extends="mxunit.framework.TestCase" {
 		var result = rule.isValid(obj, prop, 'ok_isvalid');
 		assertFalse(result);
 	}
-		
+	
 	public void function testUSDatePasses(){
 		var obj = new ok.tests.entities.FooIsValidTest();
 		var md = getMetadata(obj);
@@ -505,7 +505,7 @@ component extends="mxunit.framework.TestCase" {
 		obj.setUSDateProp('12/25/2011');		
 		var result = rule.isValid(obj, prop, 'ok_isvalid');
 		assertTrue(result);
-	}	
+	}
 	
 	public void function testUSDateFails(){
 		var obj = new ok.tests.entities.FooIsValidTest();
@@ -523,7 +523,7 @@ component extends="mxunit.framework.TestCase" {
 		obj.setVariableNameProp('$test');		
 		var result = rule.isValid(obj, prop, 'ok_isvalid');
 		assertTrue(result);
-	}	
+	}
 	
 	public void function testVariableNameFails(){
 		var obj = new ok.tests.entities.FooIsValidTest();
@@ -541,7 +541,7 @@ component extends="mxunit.framework.TestCase" {
 		obj.setZipCodeProp('19104');		
 		var result = rule.isValid(obj, prop, 'ok_isvalid');
 		assertTrue(result);
-	}	
+	}
 	
 	public void function testZipCode9Passes(){
 		var obj = new ok.tests.entities.FooIsValidTest();
@@ -550,7 +550,7 @@ component extends="mxunit.framework.TestCase" {
 		obj.setZipCodeProp('19104-6301');		
 		var result = rule.isValid(obj, prop, 'ok_isvalid');
 		assertTrue(result);
-	}	
+	}
 	
 	public void function testZipCodeFails(){
 		var obj = new ok.tests.entities.FooIsValidTest();
@@ -560,8 +560,5 @@ component extends="mxunit.framework.TestCase" {
 		var result = rule.isValid(obj, prop, 'ok_isvalid');
 		assertFalse(result);
 	}
-	
 
-		
-		
 }

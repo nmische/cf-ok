@@ -1,9 +1,9 @@
 component extends="mxunit.framework.TestCase" {
 
 	public void function beforeTests() {
-		ormReload();	
+		ormReload();
 	}
-
+	
 	public void function setup() {
 		ormReload();
 		messageProvider = new ok.MessageProvider(); 
@@ -20,7 +20,7 @@ component extends="mxunit.framework.TestCase" {
 	}
 	
 	public void function testRuleFails(){
-		var first = new ok.tests.entities.FooUniqueTest();		
+		var first = new ok.tests.entities.FooUniqueTest();
 		first.setFirstName('First');
 		first.setLastName('Last');
 		EntitySave(first);
@@ -43,6 +43,4 @@ component extends="mxunit.framework.TestCase" {
 		assertEquals('foo unique test must be unique.',msg);
 	}
 
-	
-	
 }

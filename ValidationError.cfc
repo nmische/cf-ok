@@ -2,7 +2,7 @@ component accessors="true" {
 
 	property string context;
 	property string entity;
-	property string validationLevel; 
+	property string validationLevel;
 	property string property;
 	property string validationType;
 	property string message;
@@ -10,5 +10,5 @@ component accessors="true" {
 	public function init(){
 		return this;
 	}
-		
+
 }

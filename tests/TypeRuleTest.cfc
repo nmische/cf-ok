@@ -1,13 +1,13 @@
 component extends="mxunit.framework.TestCase" {
 
 	public void function beforeTests() {
-		ormReload();	
+		ormReload();
 	}
-
+	
 	public void function setup(){
 		messageProvider = new ok.MessageProvider(); 
 		rule = new ok.rules.TypeRule(messageProvider);
-	}	
+	}
 	
 	public void function testRulePasses(){
 		var obj = new ok.tests.entities.FooTypeTest();
@@ -26,6 +26,4 @@ component extends="mxunit.framework.TestCase" {
 		/* nothing */
 	}
 
-	
-	
 }

@@ -1,13 +1,13 @@
 component extends="mxunit.framework.TestCase" {
 
 	public void function beforeTests() {
-		ormReload();	
+		ormReload();
 	}
 
 	public void function setup() {
 		messageProvider = new ok.MessageProvider(); 
 		rule = new ok.rules.LengthRule(messageProvider);
-	}	
+	}
 	
 	public void function testRulePasses(){
 		var obj = new ok.tests.entities.FooLengthTest();
@@ -36,6 +36,4 @@ component extends="mxunit.framework.TestCase" {
 		assertEquals(msg, 'Property must be less than 5 characters.');
 	}
 
-	
-	
 }

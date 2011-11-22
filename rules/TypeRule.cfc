@@ -60,10 +60,10 @@ component extends="PropertyRule" {
 				
 			default:
 				return isInstanceOf(val,prop.type);
-				break;				
+				break;
 			
 		}
-			
+		
 	}
 
 }

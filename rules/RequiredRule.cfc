@@ -2,9 +2,9 @@ component extends="PropertyRule" {
 
 	variables.attributeNames = ['ok_required'];
 
-	function isValid(obj, md, key) {		
+	function isValid(obj, md, key) {
 		var val = getValue(obj, md.name);
-				
+		
 		// if null then not valid
 		if (isNull(val)) {
 			return false;
@@ -17,7 +17,7 @@ component extends="PropertyRule" {
 		
 		// else it has a value
 		return true;
-				
+		
 	}
 
 }

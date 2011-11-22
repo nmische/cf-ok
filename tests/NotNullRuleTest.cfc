@@ -1,13 +1,13 @@
 component extends="mxunit.framework.TestCase" {
 
 	public void function beforeTests() {
-		ormReload();	
+		ormReload();
 	}
-
+	
 	public void function setup(){
 		messageProvider = new ok.MessageProvider(); 
 		rule = new ok.rules.NotNullRule(messageProvider);
-	}	
+	}
 	
 	public void function testRulePasses(){
 		var obj = new ok.tests.entities.FooNotNullTest();
@@ -33,5 +33,5 @@ component extends="mxunit.framework.TestCase" {
 		var msg = rule.getMessage(obj,prop,'notnull');
 		assertEquals(msg, 'Property is required.');
 	}	
-	
+
 }

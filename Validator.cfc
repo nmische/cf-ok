@@ -2,15 +2,15 @@ component accessors="true" {
 
 	property struct propertyRules;
 	property struct componentRules;
-
+	
 	function init(resourceBundle='DefaultMessages') {
-			
+		
 		var propertyRules = {};
 		var componentRules = {};
-			
+		
 		var messageProvider = new MessageProvider(arguments.resourceBundle);
 		var ruleFiles = directoryList(expandPath('/ok/rules'),false,'name');
-			
+		
 		for(var ruleFile in ruleFiles) {
 			var cfcName = 'ok.rules.' & getToken(ruleFile,1,'.');
 			var rule = createObject(cfcName).init(messageProvider);
@@ -25,7 +25,7 @@ component accessors="true" {
 					componentRules[attributeName] = rule;
 				}
 				
-			}			
+			}
 		}
 		
 		setPropertyRules(propertyRules);
@@ -42,7 +42,7 @@ component accessors="true" {
 		var objMetaData = (isNull(arguments.md)) ?  getMetaData(arguments.obj) : arguments.md;
 		var validationResult = (isNull(arguments.vr)) ? new ValidationResult() : arguments.vr;	
 		var context = (isNull(arguments.c)) ? objMetaData.name : arguments.c;
-				
+		
 		// recurse into any parent objects
 		if( !isNull(objMetaData.extends) ) {	
 			validate(arguments.obj, objMetaData.extends, validationResult, context);
@@ -53,21 +53,21 @@ component accessors="true" {
 			if( structKeyExists(componentRules,attribute) ) {
 				var rule = componentRules[attribute];
 				if (!rule.isValid(obj, objMetaData, attribute)) {
-					var msg = rule.getMessage(obj, objMetaData, attribute);					
+					var msg = rule.getMessage(obj, objMetaData, attribute);
 					validationResult.addError(
 						context,
 						objMetaData.name,
 						'component',
 						'',
 						attribute,
-						msg);					
+						msg);
 				}
-			}			
+			}
 		}
 		
 		// property level validation
 		var props = (isNull(objMetaData.properties)) ? [] : objMetaData.properties;
-				
+		
 		for(var i=1; i <= ArrayLen(props); i++) {
 			
 			var prop = props[i];
@@ -81,7 +81,7 @@ component accessors="true" {
 				
 					if( structKeyExists(propertyRules,attribute) 
 						&& ( left(attribute,3) == 'ok_' || listFindNoCase(attributeList,attribute) ) ) {
-							
+						
 						var rule = propertyRules[attribute];
 						
 						if (!rule.isValid(obj, prop, attribute)) {
@@ -92,13 +92,13 @@ component accessors="true" {
 								'property',
 								prop.name,
 								attribute,
-								msg);		
+								msg);
 						}
+						
+					}
+					
+				}
 				
-					}	
-	
-				}	
-								
 			}
 			
 			// relationships
@@ -113,7 +113,7 @@ component accessors="true" {
 				
 					if( structKeyExists(propertyRules,attribute) 
 						&& ( left(attribute,3) == 'ok_' || listFindNoCase(attributeList,attribute) ) ) {
-							
+						
 						var rule = propertyRules[attribute];
 						
 						if (!rule.isValid(obj, prop, attribute)) {
@@ -124,18 +124,18 @@ component accessors="true" {
 								'property',
 								prop.name,
 								attribute,
-								msg);		
+								msg);
 						}
-				
-					}	
+						
+					}
 					
 					// nested validation
-					if( attribute == 'ok_validate') {	
+					if( attribute == 'ok_validate') {
 						var children = evaluate('obj.get#prop.name#()');
 						
 						if(!isNull(children)){
-														
-							if(isArray(children)){								
+							
+							if(isArray(children)){
 								for(var j = 1; j <= arrayLen(children); j++) {
 									var currentContext = context & '.' & prop.name & '[' & j & ']';
 									validate(obj=children[j],vr=validationResult,c=currentContext);
@@ -156,18 +156,18 @@ component accessors="true" {
 								validate(obj=children,vr=validationResult,c=currentContext);
 							}	
 							
-						}						
+						}
 						
 					}
-	
-				}
-						
-			}			
 					
-		}	
+				}
+				
+			}
+			
+		}
 		
 		return validationResult;
 		
 	}
-	
+
 }
