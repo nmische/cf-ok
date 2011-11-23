@@ -40,7 +40,7 @@ component extends="mxunit.framework.TestCase" {
 		obj.setFirstName('First');
 		obj.setLastName('Last');
 		var msg = rule.getMessage(obj, md, 'ok_unique');
-		assertEquals('foo unique test must be unique.',msg);
+		assertEquals('Foo unique test must be unique.',msg);
 	}
 
 }

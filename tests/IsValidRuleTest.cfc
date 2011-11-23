@@ -560,5 +560,14 @@ component extends="mxunit.framework.TestCase" {
 		var result = rule.isValid(obj, prop, 'ok_isvalid');
 		assertFalse(result);
 	}
+	
+	public void function testRuleReturnsMessage(){
+		var obj = new ok.tests.entities.FooIsValidTest();
+		var md = getMetadata(obj);
+		var prop = md.properties[31];
+		obj.setZipCodeProp('1111');
+		var msg = rule.getMessage(obj, prop, 'ok_isvalid');
+		assertEquals('Zipcode Prop is not a valid zipcode.', msg);
+	}
 
 }

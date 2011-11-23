@@ -62,5 +62,13 @@ component extends="mxunit.framework.TestCase" {
 		var result = rule.isValid(obj,prop,'ok_required');
 		assertFalse(result);
 	}
+	
+	public void function testRuleReturnsMessage(){
+		var obj = new ok.tests.entities.FooRequiredTest();
+		var md = getMetadata(obj);
+		var prop = md.properties[4];;
+		var msg = rule.getMessage(obj,prop,'ok_required');
+		assertEquals('Foo type tests is required.', msg);
+	}
 
 }

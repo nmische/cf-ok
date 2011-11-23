@@ -33,7 +33,7 @@ component extends="mxunit.framework.TestCase" {
 		var md = getMetadata(obj);
 		var prop = md.properties[2];
 		var msg = rule.getMessage(obj,prop,'length');
-		assertEquals(msg, 'Property must be less than 5 characters.');
+		assertEquals('Property must be less than 5 characters.', msg);
 	}
 
 }
