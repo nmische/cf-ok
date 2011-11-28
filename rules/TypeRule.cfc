@@ -1,6 +1,6 @@
 component extends="PropertyRule" {
 
-	variables.attributeNames = ['type'];
+	variables.attributeNames = ['type','ormtype'];
 
 	function isValid(obj, md, key) {
 		
