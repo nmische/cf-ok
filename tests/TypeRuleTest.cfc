@@ -25,5 +25,33 @@ component extends="mxunit.framework.TestCase" {
 	public void function testRuleReturnsMessage(){
 		/* nothing */
 	}
+	
+	public void function testORMRulePasses(){
+		var obj = new ok.tests.entities.FooORMTypeTest();
+		var md = getMetadata(obj);
+		var prop = md.properties[2];
+		obj.setProperty('Test');
+		var result = rule.isValid(obj, prop, 'ormtype');
+		assertTrue(result);
+	}
+	
+	public void function testORMRuleFails(){
+		var obj = new ok.tests.entities.FooORMTypeTest();
+		var md = getMetadata(obj);
+		var prop = md.properties[2];
+		obj.setProperty({key='value'});
+		var result = rule.isValid(obj, prop, 'ormtype');
+		assertFalse(result);
+	}
+	
+	public void function testORMRuleReturnsMessage(){
+		var obj = new ok.tests.entities.FooORMTypeTest();
+		var md = getMetadata(obj);
+		var prop = md.properties[2];
+		obj.setProperty({key='value'});
+		var msg = rule.getMessage(obj,prop,'ormtype');
+		assertEquals('Property is not of type string.', msg);
+	}
+
 
 }
