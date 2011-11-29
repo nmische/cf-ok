@@ -10,10 +10,18 @@ component extends="ComponentRule" {
 		// collect values
 		for( var i=1; i <= listLen(props); i++ ) {
 			var prop = trim(listGetAt(props,i));
-			arrayAppend(vals,getValue(obj, prop));
+			var val = getValue(obj, prop);
+			if (!isNull(val)) {
+				arrayAppend(vals,val);
+			}
 		}
 		
-		return vals[1] lte vals[2];
+		// we may not have values for some of the targeted properties
+		if (arrayLen(vals) eq 2) {
+			return vals[1] lte vals[2];
+		}
+		
+		return true;
 	}
 	
 	function getMessage(obj, md, key) {
