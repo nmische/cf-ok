@@ -14,7 +14,7 @@ component extends="PropertyRule" {
 	}
 	
 	function getMessage(obj, md, key) {
-		var rawMessage = getMessageProvider().getMessage(key);
+		var rawMessage = structKeyExists(md, "ok_message") ? md.ok_message : getMessageProvider().getMessage(key);
 		var display = structKeyExists(md,"display") ? md.display : humanize(listLast(md.name,'.'));
 		var keyVal = isDate(md[key]) ? md[key] : now();
 		keyVal = dateFormat(keyVal);

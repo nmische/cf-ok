@@ -24,7 +24,7 @@ component extends="ComponentRule" {
 	}
 	
 	function getMessage(obj, md, key) {
-		var rawMessage = getMessageProvider().getMessage(key);
+		var rawMessage = structKeyExists(md, "ok_message") ? md.ok_message : getMessageProvider().getMessage(key);
 		var display = structKeyExists(md,"display") ? md.display : humanize(listLast(md.name,'.'));
 		var props = md[key];
 		var keyVal = "";
