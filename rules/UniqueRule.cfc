@@ -4,20 +4,16 @@ component extends="ComponentRule" {
 
 	function isValid(obj, md, key) {
 		
-		var cols = md[key];
+		var filter = {};
+		var props = md[key];
 		var entityName = structKeyExists(md,'entityName') ? md.entityName : listLast(md.name,'.');
-		
-		var q = new query(dbtype="hql");
-		var hql = "from #entityName# where 1=1";
-		for( var i=1; i <= listLen(cols); i++ ) {
-			var col = listGetAt(cols,i);
-			hql &= " and #col# = ?";
-			q.addParam(value=getValue(obj,col),cfsqltype='varchar',null=isNull(getValue(obj,col)));
-		}
-		q.setSQL(hql);
-		var result = q.execute();
-		
-		return ArrayLen(result.getResult()) == 0;
+		for( var i=1; i <= listLen(props); i++ ) {
+			var prop = listGetAt(props,i);
+			filter[prop] = getValue(obj,prop);			
+		}		
+		var found = entityLoad(entityName,filter);
+			
+		return arrayLen(found) == 0;
 		
 	}
 
