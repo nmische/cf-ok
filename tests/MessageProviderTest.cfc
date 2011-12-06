@@ -5,7 +5,7 @@ component extends="mxunit.framework.TestCase" {
 	}
 
 	public void function setup(){
-		messageProvider = new ok.MessageProvider('DefaultMessages');
+		messageProvider = new ok.MessageProvider();
 	}
 
 	public void function testGetMessageReturnsMessage(){

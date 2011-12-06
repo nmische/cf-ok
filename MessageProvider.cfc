@@ -1,24 +1,27 @@
 component accessors="true" {
-
+	
 	property string resourceBundle;
 	property struct messages;
 
-	function init(resourceBundle='DefaultMessages') {
-		setResourceBundle(arguments.resourceBundle);
+	function init(resourceBundle) {
 		setMessages({});
-		loadResourceBundle();
+		loadResourceBundle(getDefaultResourceBundle());
+		if (structKeyExists(arguments,"resourceBundle")) {
+			setResourceBundle(arguments.resourceBundle);
+			loadResourceBundle(arguments.resourceBundle);
+		}
 		return this;
 	} 
 	
-	private function loadResourceBundle() {
-		var file = fileOpen(getResourceBundle());
+	private function loadResourceBundle(path) {
+		var file = fileOpen(path);
 		var messages = getMessages();		
 		while (! fileIsEOF(file)) {
 			var x = fileReadLine(file);
 			var type = listFirst(x,"=");
 			var message = listLast(x,"=");
 			messages[type] = message;
-		}
+		}		
 	}
 	
 	public function getMessage(type) {
@@ -29,11 +32,8 @@ component accessors="true" {
 		return "";
 	}
 	
-	public function getResourceBundle() {
-		var dir = getDirectoryFromPath(getCurrentTemplatePath());
-		var rbPath = dir & "resources/" & variables.resourceBundle;
-		rbPath = (right(rbPath,11) == '.properties') ? rbPath : rbPath & '.properties';
-		return rbPath;
+	private function getDefaultResourceBundle() {
+		return getDirectoryFromPath(getCurrentTemplatePath()) & "resources/DefaultMessages.properties";
 	}
 
 }

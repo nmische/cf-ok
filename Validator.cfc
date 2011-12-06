@@ -3,12 +3,12 @@ component accessors="true" {
 	property struct propertyRules;
 	property struct componentRules;
 	
-	function init(resourceBundle='DefaultMessages') {
+	function init(resourceBundle) {
 		
 		var propertyRules = {};
 		var componentRules = {};
 		
-		var messageProvider = new MessageProvider(arguments.resourceBundle);
+		var messageProvider = new MessageProvider(argumentcollection=arguments);
 		var ruleFiles = directoryList(expandPath('/ok/rules'),false,'name');
 		
 		for(var ruleFile in ruleFiles) {

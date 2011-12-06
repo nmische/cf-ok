@@ -5,7 +5,7 @@ component extends="mxunit.framework.TestCase" {
 	}
 	
 	public void function setup(){
-		validator = new ok.Validator('DefaultMessages');
+		validator = new ok.Validator();
 	}
 	
 	public void function testInit(){
