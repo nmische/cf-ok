@@ -3,29 +3,19 @@ component accessors="true" {
 	property struct propertyRules;
 	property struct componentRules;
 	
-	function init(resourceBundle) {
+	function init(rulesDirectory, rulesCfcPath, resourceBundle) {
 		
 		var propertyRules = {};
 		var componentRules = {};
 		
 		var messageProvider = new MessageProvider(argumentcollection=arguments);
-		var ruleFiles = directoryList(expandPath('/ok/rules'),false,'name');
 		
-		for(var ruleFile in ruleFiles) {
-			var cfcName = 'ok.rules.' & getToken(ruleFile,1,'.');
-			var rule = createObject(cfcName).init(messageProvider);
-			
-			for(var attributeName in rule.getAttributeNames()){
-				
-				if (isInstanceOf(rule,'ok.rules.PropertyRule')) {
-					propertyRules[attributeName] = rule;
-				}
-				
-				if (isInstanceOf(rule,'ok.rules.ComponentRule')) {
-					componentRules[attributeName] = rule;
-				}
-				
-			}
+		// load default rules
+		loadRules(expandPath('/ok/rules'), 'ok.rules', propertyRules, componentRules, messageProvider);
+		
+		// load custom rules
+		if (structKeyExists(arguments,'rulesDirectory') && directoryExists(arguments.rulesDirectory)) {
+			loadRules(arguments.rulesDirectory, arguments.rulesCfcPath, propertyRules, componentRules, messageProvider);
 		}
 		
 		setPropertyRules(propertyRules);
@@ -34,7 +24,7 @@ component accessors="true" {
 		return this;
 		
 	}
-	
+		
 	function validate(obj, md, vr, c) {
 		
 		var propertyRules = getPropertyRules();
@@ -167,6 +157,29 @@ component accessors="true" {
 		}
 		
 		return validationResult;
+		
+	}
+	
+	private function loadRules(path, cfcPath, propertyRules, componentRules, messageProvider) {
+		var ruleFiles = directoryList(arguments.path,false,'name');
+		var dotPath = (right(arguments.cfcPath,1) == '.') ? arguments.cfcPath : arguments.cfcPath & '.';
+		
+		for(var ruleFile in ruleFiles) {
+			var cfcName = dotPath & getToken(ruleFile,1,'.');
+			var rule = createObject(cfcName).init(arguments.messageProvider);
+			
+			for(var attributeName in rule.getAttributeNames()){
+				
+				if (isInstanceOf(rule,'ok.rules.PropertyRule')) {
+					arguments.propertyRules[attributeName] = rule;
+				}
+				
+				if (isInstanceOf(rule,'ok.rules.ComponentRule')) {
+					arguments.componentRules[attributeName] = rule;
+				}
+				
+			}
+		}
 		
 	}
 
