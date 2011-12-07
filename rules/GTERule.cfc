@@ -18,7 +18,7 @@ component extends="ComponentRule" {
 		
 		// we may not have values for some of the targeted properties
 		if (arrayLen(vals) eq 2) {
-			return vals[1] lte vals[2];
+			return vals[1] gte vals[2];
 		} 
 		
 		return true;
