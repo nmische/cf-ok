@@ -12,9 +12,20 @@ component extends="ComponentRule" {
 			filter[prop] = getValue(obj,prop);			
 		}		
 		var found = entityLoad(entityName,filter);
-			
-		return arrayLen(found) == 0;
 		
+		// if no others are found then it is unique
+		if ( arrayLen(found) == 0 ) {
+			return true;
+		}
+		
+		// if one is found, make sure it matches the obj
+		if ( arrayLen(found) == 1 ) {
+			return arrayFind(found,obj);	
+		}
+
+		// if more than one found then it is definitely not unique
+		return false;
+
 	}
 
 }

@@ -23,7 +23,7 @@ component extends="mxunit.framework.TestCase" {
 		var first = new ok.tests.entities.FooUniqueTest();
 		first.setFirstName('First');
 		first.setLastName('Last');
-		EntitySave(first);
+		entitySave(first);
 		
 		var obj = new ok.tests.entities.FooUniqueTest();
 		var md = getMetadata(obj);
@@ -31,6 +31,24 @@ component extends="mxunit.framework.TestCase" {
 		obj.setLastName('Last');
 		var result = rule.isValid(obj, md, 'ok_unique');
 		assertFalse(result);
+		
+	}
+	
+	public void function testRuleUpdatePasses(){
+		var first = new ok.tests.entities.FooUniqueTest();
+		first.setFirstName('Test');
+		first.setLastName('Test');
+		first.setNickName('Test');
+		entitySave(first);
+		ormFlush();
+		var id = first.getId();
+		
+		// now load a second instance of the object
+		var obj = entityLoad('FooUniqueTest',id,true);
+		var md = getMetadata(obj);
+		obj.setNickName('Testing');
+		var result = rule.isValid(obj, md, 'ok_unique');
+		assertTrue(result);
 		
 	}
 	
