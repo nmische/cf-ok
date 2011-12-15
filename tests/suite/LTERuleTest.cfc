@@ -19,6 +19,23 @@ component extends="mxunit.framework.TestCase" {
 		assertTrue(result);
 	}
 	
+	public void function testNullPasses(){
+		var obj = new ok.tests.entities.FooLTETest();
+		var md = getMetadata(obj);
+		obj.setFirstProp(1);
+		var result = rule.isValid(obj, md, 'ok_lte');
+		assertTrue(result);
+	}
+	
+	public void function testBlankPasses(){
+		var obj = new ok.tests.entities.FooLTETest();
+		var md = getMetadata(obj);
+		obj.setFirstProp(1);
+		obj.setSecondProp('');
+		var result = rule.isValid(obj, md, 'ok_lte');
+		assertTrue(result);
+	}
+	
 	public void function testRuleFails(){
 		var obj = new ok.tests.entities.FooLTETest();
 		var md = getMetadata(obj);

@@ -11,7 +11,7 @@ component extends="ComponentRule" {
 		for( var i=1; i <= listLen(props); i++ ) {
 			var prop = trim(listGetAt(props,i));
 			var val = getValue(obj, prop);
-			if (!isNull(val)) {
+			if ( !(isNull(val) || (isSimpleValue(val) && len(val) eq 0)) ) {
 				arrayAppend(vals,val);
 			}
 		}

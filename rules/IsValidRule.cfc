@@ -6,7 +6,7 @@ component extends="PropertyRule" {
 		
 		var val = getValue(obj, md.name);
 		
-		if (isNull(val)) return true;
+		if ( isNull(val) || (isSimpleValue(val) && len(val) eq 0) ) return true;
 		
 		switch (md[key]) {
 			

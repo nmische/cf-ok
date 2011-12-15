@@ -9,6 +9,23 @@ component extends="mxunit.framework.TestCase" {
 		rule = new ok.rules.IsValidRule(messageProvider);
 	}
 	
+	public void function testNullPasses(){
+		var obj = new ok.tests.entities.FooIsValidTest();
+		var md = getMetadata(obj);
+		var prop = md.properties[2];
+		var result = rule.isValid(obj, prop, 'ok_isvalid');
+		assertTrue(result);
+	}
+	
+	public void function testBlankPasses(){
+		var obj = new ok.tests.entities.FooIsValidTest();
+		var md = getMetadata(obj);
+		var prop = md.properties[2];
+		obj.setAnyProp('');
+		var result = rule.isValid(obj, prop, 'ok_isvalid');
+		assertTrue(result);
+	}
+	
 	public void function testAnyPasses(){
 		var obj = new ok.tests.entities.FooIsValidTest();
 		var md = getMetadata(obj);
