@@ -1,0 +1,16 @@
+<project name="cf-ok" default="build-dist" basedir=".">
+	
+	<property name="version" value="0.1" />
+
+	<target name="clean">
+		<delete dir="${basedir}/dist" />
+	</target>
+	
+	<target name="build-dist" depends="clean">
+		<mkdir dir="${basedir}/dist" />
+		<zip destfile="${basedir}/dist/ok-${version}.zip">
+			<zipfileset dir="${basedir}" excludes=".git/,dist/,tests/,.DS_Store,build.xml" prefix="ok" />
+		</zip>
+	</target>	
+	
+</project>
