@@ -52,10 +52,10 @@ The next step is populating the entity with data.
 
 ```
 contact = new Contact({
-	firstName="First",
-	lastName="Last",
-	phone="123-456-7890",
-	email="first.last@example.com" });
+    firstName="First",
+    lastName="Last",
+    phone="123-456-7890",
+    email="first.last@example.com" });
 ```
 
 ### Step 3: Validate ###
@@ -79,9 +79,9 @@ The `ok.Validator`'s validate method returns an instance of the `ok.ValidationRe
 
 ```
 if (results.hasErrors()) {
-	for (error in results.getErrors()) {
-		WriteOutput(error.getMessage());
-	}
+    for (error in results.getErrors()) {
+        WriteOutput(error.getMessage());
+    }
 }
 ```
 
@@ -103,7 +103,7 @@ The `ok.ValidationError` has the following properties, which are accessible via 
 
 OK validation rules may apply to either the entity as a whole or individual properties.
 
-### Component Rules ###
+### Component Validation ###
 
 Following is a list of pre-defined component level rules:
 
@@ -113,13 +113,15 @@ Following is a list of pre-defined component level rules:
 * __MatchRule:__ Does a case sensitive comparison of two or more property values. 
 * __UniqueRule:__ Validates that an entity is unique based on a given property or list of properties. 
 
-### Property Rules ###
+### Property Validation ###
+
+Following is a list of pre-defined property level rules:
 
 * __AssertFalseRule:__ Assert the property value is false.
 * __AssertTrueRule:__ Assert the property value is true.
 * __FutureRule:__ Check that the property value is a date after the given date. If no date is given (i.e. ok_future="true") then this rule compares the property value to the current date and time.
 * __InListRule:__ Makes sure the property value is in the given list of values.
-* __IsValidRule:__ Tests that the property value meets a validation or data type rule. The rules are the same as ColdFusion's built in [IsValid() funciton](http://help.adobe.com/en_US/ColdFusion/9.0/CFMLRef/WSc3ff6d0ea77859461172e0811cbec22c24-7fb9.html).
+* __IsValidRule:__ Tests that the property value meets a validation or data type rule. The rules are the same as ColdFusion's built in [IsValid() funciton](http://help.adobe.com/en_US/ColdFusion/9.0/CFMLRef/WSc3ff6d0ea77859461172e0811cbec22c24-7fb9.html). If validating a range the optional attributes `ok_min` and `ok_max` may be specified. If validating a regular expression the required attribute `ok_pattern` must be defined.
 * __NotInListRule:__ Makes sure the property value is not in the given list of values.
 * __PasswordRule:__ Makes sure the property value meets security rules. Validation levels include: low (the default), medium, high.
 * __PastRule:__ Check that the property value is a date before the given date. If no date is given (i.e. ok_past="true") then this rule compares the property value to the current date and time.
@@ -139,6 +141,27 @@ Supported attributes include:
 * ormtype
 * length
 * notnull
+
+#### Nested Valdation ####
+
+OK supports validation of ORM relationship properties. To require that the relationship contain at least one related entity add the ok_required attribute to the property (ok_required="true"). To do full validation on related entities add the ok_validate attribute to the property with a value of true (ok_validate="true"). Validation is not done on properties defined as inverse (i.e. inverse="true").
+
+Below is a sample ORM entity that does nested validation on the children property.
+
+```
+component entityname="Person" persistent="true" ok_unique="firstName,lastName" {
+
+    property name="id" fieldtype="id" generator="native";
+    property name="firstName" type="string" ormtype="string";
+    property name="lastName" type="string" ormtype="string";
+    property name="phone" type="string" ormtype="string" ok_isvalid="telephone";
+    property name="children" singularname="child" fieldtype="one-to-many" cfc="Person" fkcolumn="parentID" ok_validate="true";
+    property name="parent" fieldtype="many-to-one" cfc="Person" fkcolumn="parentID" inverse="true";
+
+}
+```
+
+__Note:__ At this point there are no checks in place for circular references so care should be taken to avoid infinite recursion.
 
 ### Custom Rules ###
 
@@ -178,3 +201,5 @@ Note that tokens surrounded in braces are replaced on message generation.
 ### Custom Messages ###
 
 Documentation Coming Soon!
+
+
