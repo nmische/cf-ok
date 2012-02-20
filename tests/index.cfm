@@ -1,4 +1,4 @@
-<cfsetting showdebugoutput="false" />
+<cfsetting showdebugoutput="false" requesttimeout="300" />
 
 <cfinvoke component="mxunit.runner.DirectoryTestSuite"
           method="run"

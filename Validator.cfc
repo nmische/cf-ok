@@ -94,9 +94,10 @@ component accessors="true" {
 			// relationships
 			if ( (fieldType == 'one-to-one' 
 				|| fieldType == 'one-to-many'
-					|| fieldType == 'many-to-many')
-						&& (!structKeyExists(prop,'inverse') 
-							|| prop.inverse == false) ) {
+                    || fieldType == 'many-to-one'
+                        || fieldType == 'many-to-many')
+                            && (!structKeyExists(prop,'inverse') 
+                                || prop.inverse == false) ) {
 				
 				
 				for(var attribute in prop) {
