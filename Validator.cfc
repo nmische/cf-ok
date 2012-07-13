@@ -8,7 +8,7 @@ component accessors="true" {
 		var propertyRules = {};
 		var componentRules = {};
 		
-		var messageProvider = new MessageProvider(argumentcollection=arguments);
+		var messageProvider = new ok.MessageProvider(argumentcollection=arguments);
 		
 		// load default rules
 		loadRules(expandPath('/ok/rules'), 'ok.rules', propertyRules, componentRules, messageProvider);
@@ -30,7 +30,7 @@ component accessors="true" {
 		var propertyRules = getPropertyRules();
 		var componentRules = getComponentRules();
 		var objMetaData = (isNull(arguments.md)) ?  getMetaData(arguments.obj) : arguments.md;
-		var validationResult = (isNull(arguments.vr)) ? new ValidationResult() : arguments.vr;	
+		var validationResult = (isNull(arguments.vr)) ? new ok.ValidationResult() : arguments.vr;	
 		var context = (isNull(arguments.c)) ? objMetaData.name : arguments.c;
 		
 		// recurse into any parent objects
