@@ -6,6 +6,7 @@ component extends="mxunit.framework.TestCase" {
 	
 	public void function setup(){
 		validator = new ok.Validator();
+		ormClearSession();
 	}
 	
 	public void function testInit(){

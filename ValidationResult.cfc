@@ -16,7 +16,7 @@ component accessors="true" {
 	}
 	
 	public function addError(context, entity, validationlevel, property, validationType, message){
-		var validationError = new validationError();
+		var validationError = new ok.ValidationError();
 		
 		validationError.setContext(arguments.context);
 		validationError.setEntity(arguments.entity);

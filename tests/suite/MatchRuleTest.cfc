@@ -8,6 +8,7 @@ component extends="mxunit.framework.TestCase" {
 		ormReload();
 		messageProvider = new ok.MessageProvider(); 
 		rule = new ok.rules.MatchRule(messageProvider);
+		ormClearSession();
 	}	
 	
 	public void function testRulePasses(){

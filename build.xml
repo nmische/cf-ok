@@ -1,6 +1,6 @@
 <project name="cf-ok" default="build-dist" basedir=".">
 	
-	<property name="version" value="0.1" />
+	<property name="version" value="0.2" />
 
 	<target name="clean">
 		<delete dir="${basedir}/dist" />

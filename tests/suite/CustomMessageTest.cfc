@@ -9,6 +9,7 @@ component extends="mxunit.framework.TestCase" {
 		messageProvider = new ok.MessageProvider(); 
 		matchRule = new ok.rules.MatchRule(messageProvider);
 		typeRule = new ok.rules.TypeRule(messageProvider);
+		ormClearSession();
 	}	
 	
 	public void function testComponentRuleReturnsCustomMessage(){

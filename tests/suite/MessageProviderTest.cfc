@@ -5,7 +5,7 @@ component extends="mxunit.framework.TestCase" {
 	}
 
 	public void function setup(){
-		
+		ormClearSession();
 	}
 
 	public void function testGetMessageReturnsMessage(){

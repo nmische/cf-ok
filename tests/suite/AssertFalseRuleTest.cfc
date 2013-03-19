@@ -7,6 +7,7 @@ component extends="mxunit.framework.TestCase" {
 	public void function setup(){
 		messageProvider = new ok.MessageProvider(); 
 		rule = new ok.rules.AssertFalseRule(messageProvider);
+		ormClearSession();
 	}
 	
 	public void function testRulePasses(){
